@@ -1,3 +1,9 @@
+Required reading:
+- [Cargo Module System](#cargo-module-system)
+- [Cargo Example](#cargo-example)
+
+
+
 ## Managing structs with factories
 
 We can build an interface with the factory pattern.
@@ -88,3 +94,11 @@ serde_json = {
 
 We need to be able to read and write from files so add a state.rs file with read and write methods.
 
+## Revisiting traits
+
+
+## Cargo Module System
+[Rust Modules System](https://gist.github.com/tnn4/b4a599a6eb237c44ac8dbf86c57a3dcf)
+
+## Cargo Example
+`cargo run --example main` runs `examples/main.rs`
