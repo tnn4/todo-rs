@@ -3,21 +3,18 @@
 
 use std::env;
 
-/// declare module to_do
-mod to_do;
-
+// crate::to_do does not work
 /// to_do/structs/done.rs::Done
-use to_do::structs::done::Done; // -> to_do/structs/done.rs::Done
+use todo::to_do::structs::done::Done; // -> to_do/structs/done.rs::Done
 /// to_do/structs/pending.rs::Pending
-use to_do::structs::pending::Pending;
+use todo::to_do::structs::pending::Pending;
 
-use crate::to_do::to_do_factory;
-use crate::to_do::ItemTypes;
-
-use to_do::structs::traits::create::Create; // you have tomimpor the Create trait to main or the compiler won't find it
+use todo::to_do::to_do_factory;
+use todo::to_do::ItemTypes;
+use todo::to_do::structs::traits::create::Create; // you have to import the Create trait to main or the compiler won't find it
 
 /// read from file
-use web_app_1::state::{read_json_file, write_to_file};
+use todo::state::{read_json_file, write_to_file}; // can't use crate::state, i.e. can't use `crate` keyword if it's in the root
 use serde_json::value::Value;
 use serde_json::{Map, json};
 
@@ -25,9 +22,12 @@ fn main() {
     let to_do_item: Result<ItemTypes, &'static str> =
         to_do_factory(
             "pending", "washing");
+
+    let mut m = Map::new();
+    m.insert("Lorem".to_string(), "ipsum".into());
     match to_do_item.unwrap() {
         ItemTypes::Pending(item) => item.create(
-            &item.super_struct.title),
+            &item.super_struct.title, &"pending".to_string(), &mut m),
         
         ItemTypes::Done(item) => println!(
             "its a done item with the title: {}",

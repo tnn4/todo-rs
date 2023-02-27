@@ -1,6 +1,16 @@
+///! src/lib.rs, this the crate root and basically the gateway for other modules
+
+/// module declarations ask the compiler to load the module and attaches the code to the crate hierarchy, relative to the current module
 pub mod state;
 
+pub mod processes;
+
+pub mod to_do;
+
 use std::env;
+
+// use todo::to_do::structs <-- this doesn't work here but works in main
+use to_do::structs;
 
 /// Check development mode:debug or release
 pub fn check_development_mode() {
